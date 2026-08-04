@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <AssemblyName>ACR.Domain</AssemblyName>
+        <RootNamespace>ARC.Domain</RootNamespace>
+    </PropertyGroup>
+
+</Project>

@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ACR.Application/ACR.Application.csproj" />
+    <Project Path="src/ACR.Cli/ACR.Cli.csproj" />
+    <Project Path="src/ACR.Domain/ACR.Domain.csproj" />
+    <Project Path="src/ACR.Infrastructure.InMemory/ACR.Infrastructure.InMemory.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <AssemblyName>ACR.Infrastructure.InMemory</AssemblyName>
+        <RootNamespace>ARC.Infrastructure.InMemory</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\ACR.Application\ACR.Application.csproj" />
+    </ItemGroup>
+
+</Project>
