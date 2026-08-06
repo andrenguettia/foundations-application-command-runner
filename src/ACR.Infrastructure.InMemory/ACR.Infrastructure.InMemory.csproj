@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\ACR.Application\ACR.Application.csproj" />
+        <ProjectReference Include="..\ACR.Domain\ACR.Domain.csproj" />
     </ItemGroup>
 
 </Project>
