@@ -32,4 +32,11 @@ public sealed class InMemoryOrderRepository : IOrderRepository
         _orderStore.Stage(order);
         return Task.CompletedTask;
     }
+
+    public Task UpdateAsync(Order order, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        _orderStore.Stage(order);
+        return Task.CompletedTask;
+    }
 }

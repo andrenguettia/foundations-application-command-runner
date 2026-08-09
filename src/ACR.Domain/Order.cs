@@ -74,7 +74,7 @@ public sealed class Order
         return new Order(id, customerId, orderStatus, totalAmount, externalReference, createdAt, updatedAt);
     }
 
-    public Order TransitionTo(OrderStatus targetStatus, DateTime currentDateTime)
+    public Order UpdateStatus(OrderStatus targetStatus, DateTime currentDateTime)
     {
         if(!_OrderTransitionRules.IsAllowed(Status, targetStatus))
         {

@@ -61,7 +61,7 @@ public sealed class CreateOrderHandler
         }
         catch (UnsupportedCurrencyException ex)
         {
-            return Result<Order>.Fail(ErrorCodes.Order.INVALID_CURRENCY_CODE, ex.Message);
+            return Result<Order>.Fail(ErrorCodes.Order.CURRENCY_CODE_NOT_SUPPORTED, ex.Message);
         }
         catch(InvalidCustomerIdException ex)
         {

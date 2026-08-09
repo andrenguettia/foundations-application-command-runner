@@ -9,4 +9,5 @@ public interface IOrderRepository
     Task<Order?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
     Task<Order?> GetByExternalReferenceAsync(ExternalReference externalReference, CancellationToken cancellationToken);
     Task StageAsync(Order order, CancellationToken cancellationToken);
+    Task UpdateAsync(Order order, CancellationToken cancellationToken);
 }
