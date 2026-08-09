@@ -4,28 +4,30 @@ public static class ErrorCodes
 {
     public static class Validation
     {
-        private const string VALIDATION_PREFIX = "Error: ";
+        private const string VALIDATION_PREFIX = "validation.";
 
-        public const string CustomerIdRequired = $"{VALIDATION_PREFIX}Customer ID required";
-        public const string OrderIdRequired = $"{VALIDATION_PREFIX}Order ID required";
-        public const string InvalidAmount = $"{VALIDATION_PREFIX}Invalid amount specified";
-        public const string InvalidCurrency = $"{VALIDATION_PREFIX}Invalid currency code specified";
-        public const string InvalidStatus = $"{VALIDATION_PREFIX}Invalid order status specified";
+        public const string CUSTOMER_ID_REQUIRED = $"{VALIDATION_PREFIX}customer_id_required";
+        public const string ORDER_ID_REQUIRED = $"{VALIDATION_PREFIX}order_id_required";
+        public const string INVALID_AMOUNT = $"{VALIDATION_PREFIX}invalid_amount";
+        public const string INVALID_CURRENCY = $"{VALIDATION_PREFIX}invalid_currency_code";
+        public const string INVALID_STATUS = $"{VALIDATION_PREFIX}invalid_order_status";
+        public const string INVALID_CUSTOMER_ID = $"{VALIDATION_PREFIX}invalid_customer_id";
     }
 
     public static class Order
     {
-        private const string ORDER_PREFIX = "Order Error: ";
-        public const string INVALID_CURRENCY_CODE = $"{ORDER_PREFIX}Currency code not supported";
-        public const string ORDER_NOT_FOUND = $"{ORDER_PREFIX}Order not found";
-        public const string INVALID_TARGET_STATUS = $"{ORDER_PREFIX}Unable to update the order status";
-        public const string INVALID_EXTERNAL_REFERENCE = $"{ORDER_PREFIX}Incorrect external reference specified";
+        private const string ORDER_PREFIX = "order.";
+
+        public const string INVALID_CURRENCY_CODE = $"{ORDER_PREFIX}currency_code_not_supported";
+        public const string ORDER_NOT_FOUND = $"{ORDER_PREFIX}order_not_found";
+        public const string INVALID_TARGET_STATUS = $"{ORDER_PREFIX}status_update_failed";
+        public const string INVALID_EXTERNAL_REFERENCE = $"{ORDER_PREFIX}incorrect_external_reference";
     }
 
     public static class Database
     {
-        private const string DATABASE_PREFIX = "Database Error: ";
+        private const string DATABASE_PREFIX = "database.";
 
-        public const string OrderSaveFailed = $"{DATABASE_PREFIX}Unable to save the order";
+        public const string ORDER_SAVE_FAILED = $"{DATABASE_PREFIX}order_save_failed";
     }
 }

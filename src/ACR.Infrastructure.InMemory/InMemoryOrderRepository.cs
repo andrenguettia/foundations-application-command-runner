@@ -20,6 +20,12 @@ public sealed class InMemoryOrderRepository : IOrderRepository
         return Task.FromResult(_orderStore.GetById(id));
     }
 
+    public Task<Order?> GetByExternalReferenceAsync(ExternalReference externalReference, CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        return Task.FromResult(_orderStore.GetByExternalReference(externalReference));
+    }
+
     public Task StageAsync(Order order, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();

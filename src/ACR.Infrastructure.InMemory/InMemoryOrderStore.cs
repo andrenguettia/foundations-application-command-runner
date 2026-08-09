@@ -13,6 +13,8 @@ public sealed class InMemoryOrderStore : IInMemoryOrderStore
 
     public Order? GetById(Guid id) => _savedOrders.TryGetValue(id, out var order) ? order : null;
 
+    public Order? GetByExternalReference(ExternalReference externalReference) => _savedOrders.Values.FirstOrDefault(order => order.ExternalReference == externalReference);
+
     public IReadOnlyList<Order> GetAllOrders() => _savedOrders.Values.OrderBy(order => order.CreatedAt).ToList();
 
     public void Stage(Order order) => _stagedOrders.Add(order);
