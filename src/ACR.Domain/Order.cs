@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using ACR.Domain.Exceptions;
 
 namespace ACR.Domain;
@@ -82,5 +83,19 @@ public sealed class Order
         }
 
         return new Order(Id, CustomerId, targetStatus, TotalAmount, ExternalReference, CreatedAt, currentDateTime);
+    }
+
+    public override string ToString()
+    {
+        var stringBuilder = new StringBuilder();
+        stringBuilder.AppendLine($"Id: {Id}");
+        stringBuilder.AppendLine($"Customer Id: {CustomerId.Value}");
+        stringBuilder.AppendLine($"Order Status: {Status.ToString()}");
+        stringBuilder.AppendLine($"Total Amount: {TotalAmount.Amount} {TotalAmount.CurrencyCode}");
+        stringBuilder.AppendLine($"External Reference: {(ExternalReference is null ? "None" : ExternalReference.Value)}");
+        stringBuilder.AppendLine($"Date Created: {CreatedAt.ToLongDateString()}");
+        stringBuilder.AppendLine($"Date Updated: {UpdatedAt.ToLongDateString()}");
+
+        return stringBuilder.ToString();
     }
 }

@@ -18,4 +18,10 @@ public sealed class Result<T>
     public static Result<T> Fail(Error error) => new (default, error);
 
     public static Result<T> Fail(string code, string message) => Fail(new Error(code, message));
+
+    public bool HasError => _error is not null;
+
+    public T Value => _value;
+    
+    public Error Error => _error;
 }
