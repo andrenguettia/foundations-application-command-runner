@@ -52,7 +52,7 @@ public sealed class UpdateOrderStatusHandler
         Order updatedOrder;
         try
         {
-            updatedOrder = order.UpdateStatus(targetStatus, _timeProvider.GetUtcNow().DateTime);
+            updatedOrder = order.UpdateStatus(targetStatus, _timeProvider.GetUtcNow().UtcDateTime);
         }
         catch (InvalidOrderTransitionException ex)
         {

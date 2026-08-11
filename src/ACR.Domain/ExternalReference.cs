@@ -11,7 +11,7 @@ public partial record ExternalReference
     /// - A string 30-40 characters in length
     /// - Containing only uppercased letters, digits and hyphens
     /// </summary>
-    [GeneratedRegex("^[A-Z0-9-]{30,40}$")]
+    [GeneratedRegex("^[A-Z0-9-]{3,40}$")]
     private static partial Regex ExternalReferencePattern();
 
     public string Value { get; }

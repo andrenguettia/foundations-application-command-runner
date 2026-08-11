@@ -1,7 +1,6 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using ACR.Application.Commands;
 using ACR.Application.Validation;
 using ACR.Domain;
@@ -16,7 +15,7 @@ namespace ACR.Cli;
 
 public class Program
 {
-    public static int Main(string[] args)
+    public static async Task<int> Main(string[] args)
     {
         var configuration = new ConfigurationBuilder()
             .SetBasePath(AppContext.BaseDirectory)
@@ -37,35 +36,43 @@ public class Program
 
         services.AddSingleton<CreateOrderHandler>();
         services.AddSingleton<UpdateOrderStatusHandler>();
+        services.AddSingleton(TimeProvider.System);
 
         var serviceProvider = services.BuildServiceProvider();
 
         var createOrderHandler = serviceProvider.GetRequiredService<CreateOrderHandler>();
-        var updateOrderHandler = serviceProvider.GetRequiredService<UpdateOrderStatusHandler>();
+        var updateOrderStatusHandler = serviceProvider.GetRequiredService<UpdateOrderStatusHandler>();
         var store = serviceProvider.GetRequiredService<InMemoryOrderStore>();
 
-        try
+        var parser = Parser.Default.ParseArguments<CommandLineOptions>(args);
+        return await parser.MapResult(async option => 
         {
-            var parser = Parser.Default.ParseArguments<CommandLineOptions>(args);
-            parser.WithParsedAsync(async (option) => 
+            try
             {
-               if(option.CreateOrder)
+                if(option.CreateOrder)
                 {
-                    Environment.ExitCode = await ExecuteCreateOrder(option, createOrderHandler);
+                    return await ExecuteCreateOrder(option, createOrderHandler);
                 }
-            });
+                else if(option.UpdateOrder)
+                {
+                    return await ExecuteUpdateOrderStatus(option, updateOrderStatusHandler);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return ExitCodes.ERROR;
+            }
 
             return ExitCodes.SUCCESS;
-        }
-        catch (CommandLineParseException ex)
-        {
-            Console.WriteLine($"Usage Error: {ex.Message}");
-            return ExitCodes.USAGE_ERROR;
-        }
+        },
+        errors => Task.FromResult(ExitCodes.ERROR));
     }
 
     private static async Task<int> ExecuteCreateOrder(CommandLineOptions commandLineOptions, CreateOrderHandler createOrderHandler)
     {
+        Console.WriteLine("Creating order...");
+
         var command = new CreateOrderCommand(
             commandLineOptions.CustomerId,
             commandLineOptions.TotalAmount,
@@ -77,7 +84,27 @@ public class Program
         if (result.HasError)
         {
             Console.WriteLine(result.Error.Message);
-            return ExitCodes.USAGE_ERROR;
+            return ExitCodes.ERROR;
+        }
+
+        Console.WriteLine(result.Value.ToString());
+        return ExitCodes.SUCCESS;
+    }
+
+    private static async Task<int> ExecuteUpdateOrderStatus(CommandLineOptions commandLineOptions, UpdateOrderStatusHandler updateOrderStatusHandler)
+    {
+        Console.WriteLine("Updating order...");
+
+        var command = new UpdateOrderStatusCommand(
+            commandLineOptions.OrderId,
+            commandLineOptions.OrderStatus);
+
+        var result = await updateOrderStatusHandler.ExecuteAsync(command, CancellationToken.None);
+
+        if (result.HasError)
+        {
+            Console.WriteLine(result.Error.Message);
+            return ExitCodes.ERROR;
         }
 
         Console.WriteLine(result.Value.ToString());

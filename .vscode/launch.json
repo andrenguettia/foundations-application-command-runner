@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Create Order",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/src/ACR.Cli/bin/Debug/net10.0/ACR.Cli",
+      "args": [
+        "--create",
+        "--customer-id", "CUST27969",
+        "--total-amount", "342.75",
+        "--currency-code", "EUR"
+      ],
+      "cwd": "${workspaceFolder}/src/ACR.Cli",
+      "console": "integratedTerminal",
+      "stopAtEntry": false
+    }
+  ]
+}

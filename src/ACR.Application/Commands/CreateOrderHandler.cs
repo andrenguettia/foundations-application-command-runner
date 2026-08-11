@@ -53,7 +53,7 @@ public sealed class CreateOrderHandler
         {
             var customerId = CustomerId.Create(command.CustomerId);
             var currency = Currency.Create(command.TotalAmount, command.CurrencyCode);
-            order = Order.Create(customerId, currency, _timeProvider.GetUtcNow().DateTime);
+            order = Order.Create(customerId, currency, _timeProvider.GetUtcNow().UtcDateTime);
         }
         catch (NegativeCurrencyAmountException ex)
         {
@@ -87,13 +87,13 @@ public sealed class CreateOrderHandler
         var externalReference = ExternalReference.Create(command.ExternalReference);
         var order = await _repository.GetByExternalReferenceAsync(externalReference, cancellationToken);
 
-        var isCustomerMatch = false;
+        var isCustomerMatch = order is not null && string.Equals(order.CustomerId.Value, command.CustomerId, StringComparison.InvariantCultureIgnoreCase);
 
         if(!isCustomerMatch)
         {
             return Result<Order>.Fail(
                 ErrorCodes.Order.INVALID_EXTERNAL_REFERENCE,
-                $"Unabled to find order '{order.ExternalReference}' for customer ID '{command.CustomerId}'");
+                $"Unable to find reference '{command.ExternalReference}' for customer ID '{command.CustomerId}'");
         }
 
         return Result<Order>.Success(order);
