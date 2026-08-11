@@ -8,7 +8,7 @@ public partial record ExternalReference
 {
     /// <summary>
     /// Assume the business requirements defined an external reference as:
-    /// - A string 30-40 characters in length
+    /// - A string 3-40 characters in length
     /// - Containing only uppercased letters, digits and hyphens
     /// </summary>
     [GeneratedRegex("^[A-Z0-9-]{3,40}$")]

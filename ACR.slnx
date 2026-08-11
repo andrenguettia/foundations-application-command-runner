@@ -5,4 +5,7 @@
     <Project Path="src/ACR.Domain/ACR.Domain.csproj" />
     <Project Path="src/ACR.Infrastructure.InMemory/ACR.Infrastructure.InMemory.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ACR.Domain.UnitTests/ACR.Domain.UnitTests.csproj" />
+  </Folder>
 </Solution>
