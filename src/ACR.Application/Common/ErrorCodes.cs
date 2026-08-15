@@ -1,4 +1,4 @@
-namespace ACR.Domain.Common;
+namespace ACR.Application.Common;
 
 public static class ErrorCodes
 {

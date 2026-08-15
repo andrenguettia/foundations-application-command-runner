@@ -1,5 +1,5 @@
 using ACR.Application.Commands;
-using ACR.Domain.Common;
+using ACR.Application.Common;
 using FluentValidation;
 
 namespace ACR.Application.Validation;

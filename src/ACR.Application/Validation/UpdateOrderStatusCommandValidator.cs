@@ -1,7 +1,7 @@
 using System;
 using ACR.Application.Commands;
+using ACR.Application.Common;
 using ACR.Domain;
-using ACR.Domain.Common;
 using FluentValidation;
 
 namespace ACR.Application.Validation;
